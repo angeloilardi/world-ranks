@@ -1,9 +1,13 @@
+import { ChangeEventHandler } from "react";
+
 export function CheckboxButton({
   option,
   name,
+  onChange,
 }: {
   option: string;
   name: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
 }) {
   return (
     <div className="h-9 rounded-lg p-2.5 text-foreground has-checked:bg-primary flex items-center">
@@ -15,6 +19,7 @@ export function CheckboxButton({
         value={option}
         className=""
         hidden
+        onChange={onChange}
       />
     </div>
   );
