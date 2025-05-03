@@ -9,7 +9,7 @@ export default function FormGroup({
 }) {
   return (
     <div className="flex flex-col w-full">
-      <label htmlFor={label} className="text-sm mb-2">
+      <label htmlFor={label} className="text-xs mb-2">
         {label}
       </label>
       {children}

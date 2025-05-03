@@ -5,6 +5,7 @@ import FormGroup from "./Form/components/FormGroup";
 import { Select } from "./Form/components/Select";
 import Hero from "./Hero";
 import { useFormik } from "formik";
+import { ResultsTable } from "./ResultsTable";
 
 const regions = [
   "Americas",
@@ -44,8 +45,8 @@ export default function CountryRanking() {
   return (
     <div>
       <Hero />
-      <div className="bg-background rounded-lg  h-screen -mt-40 z-30 mx-4 mb-6 shadow p-4 gap-6 flex flex-col">
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
+        <div className="bg-background rounded-lg -mt-40 z-30 mx-4 mb-6 shadow p-4 gap-6 flex flex-col">
           <SearchBar />
           <FormGroup label="Sort by">
             <Select
@@ -80,8 +81,9 @@ export default function CountryRanking() {
               );
             })}
           </FormGroup>
-        </form>
-      </div>
+        </div>
+      </form>
+      <ResultsTable />
     </div>
   );
 }
