@@ -1,9 +1,17 @@
-export function ResultsTable() {
+// type Country = {
+//   name: string;
+//   flags: string;
+//   population: number;
+//   area: number;
+// };
+import Image from "next/image";
+
+export function ResultsTable({ results }) {
   return (
     <div>
       <table className="w-full">
         <thead className="border-b-secondary border-b">
-          <tr className="py-3">
+          <tr className="py-2">
             <th className="py-5 text-left text-xs">Flag</th>
             <th className="py-5 text-left text-xs">Name</th>
             <th className="py-5 text-left text-xs">Population</th>
@@ -11,36 +19,32 @@ export function ResultsTable() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>cell1_1</td>
-            <td>cell2_1</td>
-            <td>cell3_1</td>
-            <td>cell4_1</td>
-          </tr>
-          <tr>
-            <td>cell1_2</td>
-            <td>cell2_2</td>
-            <td>cell3_2</td>
-            <td>cell4_2</td>
-          </tr>
-          <tr>
-            <td>cell1_3</td>
-            <td>cell2_3</td>
-            <td>cell3_3</td>
-            <td>cell4_3</td>
-          </tr>
-          <tr>
-            <td>cell1_4</td>
-            <td>cell2_4</td>
-            <td>cell3_4</td>
-            <td>cell4_4</td>
-          </tr>
-          <tr>
-            <td>cell1_5</td>
-            <td>cell2_5</td>
-            <td>cell3_5</td>
-            <td>cell4_5</td>
-          </tr>
+          {results.map((country, i) => {
+            return (
+              <tr key={i} className="py-6">
+                <td className="py-5 pr-10">
+                  {
+                    <Image
+                      src={country.flags.png}
+                      alt=""
+                      width={50}
+                      height={40}
+                      className="w-10 h-auto"
+                    />
+                  }
+                </td>
+                <td className="pr-10">
+                  <p>{country.name.common}</p>
+                </td>
+                <td className="pr-10">
+                  <p>{country.population.toLocaleString()}</p>
+                </td>
+                <td>
+                  <p>{country.area.toLocaleString()}</p>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
