@@ -63,11 +63,12 @@ export default function CountryRanking() {
             .includes(filters.searchTerm.toLowerCase()) &&
           (filters.region.length > 0
             ? filters.region.includes(item.region)
+            : true) &&
+          (filters.status.length && filters.status.includes("Independent")
+            ? item.independent
+            : filters.status.includes("Member of the United Nations")
+            ? item.unMember
             : true)
-        // &&
-        // (filters.status.length > 0
-        //   ? filters.status.includes(item.region)
-        //   : true)
       );
     },
     [data]
