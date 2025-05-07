@@ -4,26 +4,8 @@ import { Checkbox } from "./components/Checkbox";
 import { CheckboxButton } from "./components/CheckboxButton";
 import FormGroup from "./components/FormGroup";
 import { Select } from "./components/Select";
-import Image from "next/image";
-import { ChangeEventHandler, useEffect } from "react";
-
-export const SearchBar = ({
-  onChange,
-}: {
-  onChange: ChangeEventHandler<HTMLInputElement>;
-}) => {
-  return (
-    <div className="flex w-full bg-primary rounded-lg h-11 p-3 gap-2 text-foreground">
-      <Image src="/images/Search.svg" alt="" width={20} height={20} />
-      <input
-        className="w-full placeholder:text-foreground"
-        placeholder="Search by Name, Region, Subregion"
-        name="searchTerm"
-        onChange={onChange}
-      />
-    </div>
-  );
-};
+import { SearchBar } from "./components/SearchBar";
+import { useEffect } from "react";
 
 const regions = [
   "Americas",
@@ -43,7 +25,6 @@ export default function Form({ changeFilters }) {
     initialValues: {
       searchTerm: "",
       sortBy: "Population",
-      //   region: ["Americas", "Antarctic", "Africa", "Asia", "Europe", "Oceania"],
       region: [],
       status: [],
     },
@@ -53,13 +34,12 @@ export default function Form({ changeFilters }) {
   });
 
   useEffect(() => {
-    console.log(values);
     changeFilters(values);
   }, [changeFilters, values]);
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="bg-background rounded-lg -mt-40 z-30 mb-6 shadow gap-6 flex flex-col">
+      <div className="bg-background rounded-lg  z-30 mb-6 shadow gap-6 flex flex-col">
         <SearchBar onChange={handleChange} />
         <FormGroup label="Sort by">
           <Select
@@ -77,7 +57,6 @@ export default function Form({ changeFilters }) {
                   option={region}
                   name="region"
                   onChange={handleChange}
-                  checked={true}
                 />
               );
             })}
@@ -91,7 +70,6 @@ export default function Form({ changeFilters }) {
                 option={status}
                 onChange={handleChange}
                 name="status"
-                value={values.status}
               ></Checkbox>
             );
           })}

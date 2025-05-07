@@ -34,7 +34,6 @@ export default function CountryRanking() {
     }
     getCountries();
   }, [filters.sortBy]);
-  // const countries = await getCountries();
 
   const sortData = useCallback(
     (sortBy: string) => {
@@ -82,49 +81,26 @@ export default function CountryRanking() {
     setFilteredData(filterData(filters));
   }, [filters.region, filters.status, filters.searchTerm, filterData, filters]);
 
+  const Counter = () => {
+    return (
+      <div className="py-7">
+        <span>Found {filteredData.length} countries</span>
+      </div>
+    );
+  };
+
   return (
-    <div className="p-8">
+    <div>
       <Hero />
-      <Form changeFilters={(filters: FilterObject) => setFilters(filters)} />
-      {/* <form onSubmit={handleSubmit}>
-        <div className="bg-background rounded-lg -mt-40 z-30 mx-4 mb-6 shadow p-4 gap-6 flex flex-col">
-          <SearchBar />
-          <FormGroup label="Sort by">
-            <Select
-              name="sort-by"
-              options={sortOptions}
-              onChange={handleChange}
-            ></Select>
-          </FormGroup>
-          <FormGroup label="Region">
-            <div className="flex flex-wrap gap-2">
-              {regions.map((region, i) => {
-                return (
-                  <CheckboxButton
-                    key={i}
-                    option={region}
-                    name="region"
-                    onChange={handleChange}
-                  />
-                );
-              })}
-            </div>
-          </FormGroup>
-          <FormGroup label="Status">
-            {statuses.map((status, i) => {
-              return (
-                <Checkbox
-                  key={i}
-                  option={status}
-                  onChange={handleChange}
-                  name="status"
-                ></Checkbox>
-              );
-            })}
-          </FormGroup>
+      <div className="rounded-lg bg-background -mt-40 mx-4 p-4 border border-primary flex flex-col md:flex-row md:gap-6">
+        <div>
+          <Counter></Counter>
+          <Form
+            changeFilters={(filters: FilterObject) => setFilters(filters)}
+          />
         </div>
-      </form> */}
-      <ResultsTable results={filteredData} />
+        <ResultsTable results={filteredData} />
+      </div>
     </div>
   );
 }
