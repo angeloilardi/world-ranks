@@ -10,6 +10,14 @@ export async function getCountry(name: string) {
   return data[0];
 }
 
+export async function getFlag(country: string) {
+  const res = await fetch(
+    `https://restcountries.com/v3.1/alpha/${country}?fields=flags`
+  );
+  const data = await res.json();
+  return data.flags;
+}
+
 export const DetailsBox = ({ data, value }) => {
   return (
     <div className="rounded-lg bg-primary p-3 flex items-center">
@@ -22,7 +30,7 @@ export const DetailsBox = ({ data, value }) => {
 
 const DetailsRow = ({ data, value }) => {
   return (
-    <div className="flex justify-between gap-2 w-full px-6 py-8 border-b border-b-secondary">
+    <div className="flex justify-between gap-2 w-full p4-6 py-8 border-b border-b-secondary">
       <p>{data}</p>
       <p>{value} </p>
     </div>
@@ -43,8 +51,8 @@ export default async function Country({
         <Image
           src={country.flags.png}
           alt={country.flags.alt}
-          width={320}
-          height={200}
+          width={300}
+          height={240}
           className="-mt-10 rounded-lg"
         />
         <div className="mt-6 text-center">
@@ -83,6 +91,25 @@ export default async function Country({
       </div>
       <div>
         <p>Neighbouring Countries</p>
+        <div className="flex gap-4 py-4">
+          {country.borders &&
+            (await Promise.all(
+              country.borders.map(async (country, i) => {
+                const flag = await getFlag(country);
+                console.log(flag.png);
+                return (
+                  <Image
+                    key={i}
+                    src={flag.png}
+                    alt={flag.alt}
+                    width={100}
+                    height={60}
+                    className="rounded-md"
+                  />
+                );
+              })
+            ))}
+        </div>
       </div>
     </div>
   );
