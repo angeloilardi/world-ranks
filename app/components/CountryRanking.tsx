@@ -25,7 +25,7 @@ export default function CountryRanking() {
   useEffect(() => {
     async function getCountries() {
       const url =
-        "https://restcountries.com/v3.1/all?fields=name,flags,area,population,region,independent,unMember";
+        "https://restcountries.com/v3.1/all?fields=name,flags,area,population,region,independent,unMember,subregion";
       const res = await fetch(url, { cache: "force-cache" });
       const data = await res.json();
       setData(data);
@@ -57,9 +57,15 @@ export default function CountryRanking() {
     (filters: FilterObject) => {
       return data.filter(
         (item) =>
-          item.name.common
+          (item.name.common
             .toLowerCase()
-            .includes(filters.searchTerm.toLowerCase()) &&
+            .includes(filters.searchTerm.toLowerCase()) ||
+            item.region
+              .toLowerCase()
+              .includes(filters.searchTerm.toLowerCase()) ||
+            item.subregion
+              .toLowerCase()
+              .includes(filters.searchTerm.toLowerCase())) &&
           (filters.region.length > 0
             ? filters.region.includes(item.region)
             : true) &&

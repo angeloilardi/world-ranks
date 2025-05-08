@@ -47,7 +47,7 @@ export default async function Country({
   return (
     <div>
       <Hero />
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center max-w-3xl -mt-16 mb-16 border border-secondary rounded-lg bg-background mx-auto">
         <Image
           src={country.flags.png}
           alt={country.flags.alt}
@@ -88,31 +88,31 @@ export default async function Country({
             />
           </div>
         </div>
-      </div>
-      <div className="p-6">
-        <p>Neighbouring Countries</p>
-        <div className="flex gap-4 py-4 flex-wrap">
-          {country.borders &&
-            (await Promise.all(
-              country.borders.map(async (country, i) => {
-                const flag = await getFlag(country);
-                console.log(flag.png);
-                return (
-                  <div className="flex flex-col gap-4 flex-wrap" key={i}>
-                    <a href={`/country/${flag.name.common}`}>
-                      <Image
-                        src={flag.flags.png}
-                        alt={flag.flags.alt}
-                        width={100}
-                        height={60}
-                        className="rounded-md w-24 h-16"
-                      />
-                      <p>{flag.name.common}</p>
-                    </a>
-                  </div>
-                );
-              })
-            ))}
+        <div className="p-6 self-start">
+          <p>Neighbouring Countries</p>
+          <div className="flex gap-4 py-4 flex-wrap">
+            {country.borders &&
+              (await Promise.all(
+                country.borders.map(async (country, i) => {
+                  const flag = await getFlag(country);
+                  console.log(flag.png);
+                  return (
+                    <div className="flex flex-col gap-4 flex-wrap" key={i}>
+                      <a href={`/country/${flag.name.common}`}>
+                        <Image
+                          src={flag.flags.png}
+                          alt={flag.flags.alt}
+                          width={100}
+                          height={60}
+                          className="rounded-md w-24 h-16"
+                        />
+                        <p className="mt-2">{flag.name.common}</p>
+                      </a>
+                    </div>
+                  );
+                })
+              ))}
+          </div>
         </div>
       </div>
     </div>

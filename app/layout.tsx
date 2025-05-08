@@ -5,9 +5,8 @@ import "./globals.css";
 const beVietnamPro = Be_Vietnam_Pro({
   variable: "--font-be-vietnam-pro",
   subsets: ["latin"],
-  weight: ["400", "500", "700"]
+  weight: ["400", "500", "700"],
 });
-
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,11 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${beVietnamPro.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <body className={`font-main antialiased`}>{children}</body>
     </html>
   );
 }
