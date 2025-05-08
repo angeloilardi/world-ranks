@@ -12,10 +12,10 @@ export async function getCountry(name: string) {
 
 export async function getFlag(country: string) {
   const res = await fetch(
-    `https://restcountries.com/v3.1/alpha/${country}?fields=flags`
+    `https://restcountries.com/v3.1/alpha/${country}?fields=flags,name`
   );
   const data = await res.json();
-  return data.flags;
+  return data;
 }
 
 export const DetailsBox = ({ data, value }) => {
@@ -30,7 +30,7 @@ export const DetailsBox = ({ data, value }) => {
 
 const DetailsRow = ({ data, value }) => {
   return (
-    <div className="flex justify-between gap-2 w-full p4-6 py-8 border-b border-b-secondary">
+    <div className="flex justify-between gap-2 w-full px-6 py-8 border-b border-b-secondary">
       <p>{data}</p>
       <p>{value} </p>
     </div>
@@ -89,23 +89,27 @@ export default async function Country({
           </div>
         </div>
       </div>
-      <div>
+      <div className="p-6">
         <p>Neighbouring Countries</p>
-        <div className="flex gap-4 py-4">
+        <div className="flex gap-4 py-4 flex-wrap">
           {country.borders &&
             (await Promise.all(
               country.borders.map(async (country, i) => {
                 const flag = await getFlag(country);
                 console.log(flag.png);
                 return (
-                  <Image
-                    key={i}
-                    src={flag.png}
-                    alt={flag.alt}
-                    width={100}
-                    height={60}
-                    className="rounded-md"
-                  />
+                  <div className="flex flex-col gap-4 flex-wrap" key={i}>
+                    <a href={`/country/${flag.name.common}`}>
+                      <Image
+                        src={flag.flags.png}
+                        alt={flag.flags.alt}
+                        width={100}
+                        height={60}
+                        className="rounded-md w-24 h-16"
+                      />
+                      <p>{flag.name.common}</p>
+                    </a>
+                  </div>
                 );
               })
             ))}
