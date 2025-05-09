@@ -45,7 +45,6 @@ export default function CountryRanking() {
       const res = await fetch(url, { cache: "force-cache" });
       const data = await res.json();
       setData(data);
-      console.log(data);
       return data;
     }
     getCountries();

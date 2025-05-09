@@ -29,7 +29,6 @@ export async function getCountry(name: string): Promise<Country> {
     `https://restcountries.com/v3.1/name/${name}?fullText=true`
   );
   const data = await res.json();
-  console.log(data);
   return data[0];
 }
 
@@ -66,7 +65,6 @@ export default async function Country({
   params: Promise<{ id: string }>;
 }) {
   const country = await getCountry((await params).id);
-  console.log(country);
   return (
     <div>
       <Hero />
@@ -118,7 +116,6 @@ export default async function Country({
               (await Promise.all(
                 country.borders.map(async (country, i) => {
                   const flag = await getFlag(country);
-                  console.log(flag.png);
                   return (
                     <div
                       className="flex flex-col gap-4 flex-wrap max-w-24"
