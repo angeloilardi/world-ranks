@@ -20,22 +20,33 @@ const sortOptions = ["Population", "Name", "Area"];
 
 const statuses = ["Member of the United Nations", "Independent"];
 
-export default function Form({ changeFilters }: { changeFilters: void }) {
+interface FilterObject {
+  searchTerm: string;
+  region: string[];
+  status: string[];
+  sortBy: "Population" | "Name" | "Area";
+}
+
+const initialValues: FilterObject = {
+  searchTerm: "",
+  region: [],
+  status: [],
+  sortBy: "Population",
+};
+
+export default function Form({
+  changeFilters,
+}: {
+  changeFilters: (filters: FilterObject) => void;
+}) {
   const { handleSubmit, handleChange, values } = useFormik({
-    initialValues: {
-      searchTerm: "",
-      sortBy: "Population",
-      region: [],
-      status: [],
-    },
+    initialValues,
     onSubmit(values) {
       console.log(values);
     },
   });
 
-  useEffect(() => {
-    changeFilters(values);
-  }, [changeFilters, values]);
+  useEffect(() => changeFilters(values), [changeFilters, values]);
 
   return (
     <form onSubmit={handleSubmit}>

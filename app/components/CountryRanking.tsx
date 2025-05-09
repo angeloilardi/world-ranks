@@ -95,9 +95,10 @@ export default function CountryRanking() {
     [data]
   );
 
-  useEffect(() => {
-    setFilteredData(sortData(filters.sortBy));
-  }, [filters.sortBy, sortData]);
+  useEffect(
+    () => !!filters && setFilteredData(sortData(filters.sortBy) ?? []),
+    [filters, filters.sortBy, sortData]
+  );
 
   useEffect(() => {
     setFilteredData(filterData(filters));
