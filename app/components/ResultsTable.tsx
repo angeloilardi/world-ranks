@@ -1,12 +1,19 @@
-// type Country = {
-//   name: string;
-//   flags: string;
-//   population: number;
-//   area: number;
-// };
+type Country = {
+  name: {
+    common: string;
+  };
+  flags: {
+    png: string;
+    alt: string;
+  };
+  region: string;
+  population: number;
+  area: number;
+};
+
 import Image from "next/image";
 
-export function ResultsTable({ results }) {
+export function ResultsTable({ results }: { results: Country[] }) {
   return (
     <div>
       <table className="">

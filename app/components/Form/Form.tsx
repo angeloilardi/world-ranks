@@ -20,7 +20,7 @@ const sortOptions = ["Population", "Name", "Area"];
 
 const statuses = ["Member of the United Nations", "Independent"];
 
-export default function Form({ changeFilters }) {
+export default function Form({ changeFilters }: { changeFilters: void }) {
   const { handleSubmit, handleChange, values } = useFormik({
     initialValues: {
       searchTerm: "",

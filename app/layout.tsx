@@ -20,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-main antialiased`}>{children}</body>
+      <body className={`font-main antialiased ${beVietnamPro.variable}`}>
+        {children}
+      </body>
     </html>
   );
 }

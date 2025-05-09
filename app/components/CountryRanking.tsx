@@ -5,6 +5,22 @@ import Form from "./Form/Form";
 // import getCountries from "./hooks/getCountries";
 import { useCallback, useEffect, useState } from "react";
 
+interface CountryData {
+  population: number;
+  area: number;
+  region: string;
+  subregion: string;
+  name: {
+    common: string;
+  };
+  independent: boolean;
+  unMember: boolean;
+  flags: {
+    png: string;
+    alt: string;
+  };
+}
+
 interface FilterObject {
   searchTerm: string;
   region: string[];
@@ -13,8 +29,8 @@ interface FilterObject {
 }
 
 export default function CountryRanking() {
-  const [data, setData] = useState<any[]>([]);
-  const [filteredData, setFilteredData] = useState<any>(data);
+  const [data, setData] = useState<CountryData[]>([]);
+  const [filteredData, setFilteredData] = useState<CountryData[]>(data);
   const [filters, setFilters] = useState<FilterObject>({
     searchTerm: "",
     region: [],
@@ -96,9 +112,9 @@ export default function CountryRanking() {
   };
 
   return (
-    <div>
+    <>
       <Hero />
-      <div className="rounded-lg bg-background -mt-40 mx-4 p-4 border border-primary flex flex-col md:flex-row md:gap-6">
+      <div className="rounded-lg bg-background -mt-40 mx-4 p-4 border border-primary flex flex-col md:flex-row md:gap-6 z-20">
         <div>
           <Counter></Counter>
           <Form
@@ -107,6 +123,6 @@ export default function CountryRanking() {
         </div>
         <ResultsTable results={filteredData} />
       </div>
-    </div>
+    </>
   );
 }

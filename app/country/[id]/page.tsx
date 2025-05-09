@@ -1,7 +1,30 @@
 import Hero from "@/app/components/Hero";
 import Image from "next/image";
 
-export async function getCountry(name: string) {
+interface Country {
+  name: {
+    common: string;
+    official: string;
+  };
+  flags: {
+    alt: string;
+    png: string;
+  };
+  area: number;
+  languages: string[];
+  currencies: {
+    currency: {
+      name: string;
+    };
+  };
+  subregion: string;
+  continents: string[];
+  borders: string[];
+  capital: string;
+  population: number;
+}
+
+export async function getCountry(name: string): Promise<Country> {
   const res = await fetch(
     `https://restcountries.com/v3.1/name/${name}?fullText=true`
   );
@@ -18,9 +41,9 @@ export async function getFlag(country: string) {
   return data;
 }
 
-export const DetailsBox = ({ data, value }) => {
+const DetailsBox = ({ data, value }: { data: string; value: string }) => {
   return (
-    <div className="rounded-lg bg-primary p-3 flex items-center">
+    <div className="rounded-lg bg-primary p-3 flex items-center min-w-24 max-w-76 flex-wrap">
       <p>{data}</p>
       <span className="w-0.25 h-4 bg-secondary mx-2"></span>
       <p>{value}</p>
@@ -28,7 +51,7 @@ export const DetailsBox = ({ data, value }) => {
   );
 };
 
-const DetailsRow = ({ data, value }) => {
+const DetailsRow = ({ data, value }: { data: string; value: string }) => {
   return (
     <div className="flex justify-between gap-2 w-full px-6 py-8 border-b border-b-secondary">
       <p>{data}</p>
@@ -43,23 +66,23 @@ export default async function Country({
   params: Promise<{ id: string }>;
 }) {
   const country = await getCountry((await params).id);
-  console.log(country[0]);
+  console.log(country);
   return (
     <div>
       <Hero />
       <div className="flex flex-col items-center max-w-3xl -mt-16 mb-16 border border-secondary rounded-lg bg-background mx-auto">
         <Image
-          src={country.flags.png}
-          alt={country.flags.alt}
-          width={300}
-          height={240}
-          className="-mt-10 rounded-lg"
+          src={country.flags.png || ""}
+          alt={country.flags.alt || ""}
+          width={320}
+          height={213}
+          className="-mt-10 rounded-lg w-80 h-"
         />
         <div className="mt-6 text-center">
           <h1 className="text-4xl">{country.name.common}</h1>
           <h2 className="mt-2">{country.name.official}</h2>
         </div>
-        <div className="flex justify-evenly gap-4 py-12 w-full">
+        <div className="flex flex-col sm:flex-row items-center sm:justify-evenly gap-4 py-12 w-full">
           <DetailsBox
             data="Population"
             value={country.population.toLocaleString()}
@@ -97,7 +120,10 @@ export default async function Country({
                   const flag = await getFlag(country);
                   console.log(flag.png);
                   return (
-                    <div className="flex flex-col gap-4 flex-wrap" key={i}>
+                    <div
+                      className="flex flex-col gap-4 flex-wrap max-w-24"
+                      key={i}
+                    >
                       <a href={`/country/${flag.name.common}`}>
                         <Image
                           src={flag.flags.png}
