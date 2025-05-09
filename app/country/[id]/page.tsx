@@ -74,7 +74,7 @@ export default async function Country({
           alt={country.flags.alt || ""}
           width={320}
           height={213}
-          className="-mt-10 rounded-lg w-80 h-"
+          className="-mt-10 rounded-lg aspect-auto"
         />
         <div className="mt-6 text-center">
           <h1 className="text-4xl">{country.name.common}</h1>
