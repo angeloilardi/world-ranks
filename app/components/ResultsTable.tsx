@@ -22,7 +22,9 @@ export function ResultsTable({ results }: { results: Country[] }) {
             <th className="py-5 text-left text-xs min-w-[70px]">Flag</th>
             <th className="py-5 text-left text-xs">Name</th>
             <th className="py-5 text-left text-xs">Population</th>
-            <th className="py-5 text-left text-xs">Area (km²)</th>
+            <th className="py-5 text-left text-xs hidden sm:block">
+              Area (km²)
+            </th>
             <th className="py-5 text-left text-xs hidden lg:block">Region</th>
           </tr>
         </thead>
@@ -41,15 +43,15 @@ export function ResultsTable({ results }: { results: Country[] }) {
                     />
                   }
                 </td>
-                <td className="pr-10">
+                <td className="sm:pr-10">
                   <a href={`/country/${country.name.common}`}>
                     {country.name.common}
                   </a>
                 </td>
-                <td className="pr-10">
+                <td className="sm:pr-10">
                   <p>{country.population.toLocaleString()}</p>
                 </td>
-                <td className="pr-10">
+                <td className="sm:pr-10 hidden sm:table-cell">
                   <p>{country.area.toLocaleString()}</p>
                 </td>
                 <td className="hidden lg:table-cell">
