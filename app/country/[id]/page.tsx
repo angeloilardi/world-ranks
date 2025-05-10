@@ -24,7 +24,7 @@ interface Country {
   population: number;
 }
 
-export async function getCountry(name: string): Promise<Country> {
+async function getCountry(name: string): Promise<Country> {
   const res = await fetch(
     `https://restcountries.com/v3.1/name/${name}?fullText=true`
   );
@@ -32,7 +32,7 @@ export async function getCountry(name: string): Promise<Country> {
   return data[0];
 }
 
-export async function getFlag(country: string) {
+async function getFlag(country: string) {
   const res = await fetch(
     `https://restcountries.com/v3.1/alpha/${country}?fields=flags,name`
   );
