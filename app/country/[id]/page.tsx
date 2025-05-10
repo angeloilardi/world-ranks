@@ -54,7 +54,7 @@ const DetailsRow = ({ data, value }: { data: string; value: string }) => {
   return (
     <div className="flex justify-between gap-2 w-full px-6 py-8 border-b border-b-secondary">
       <p>{data}</p>
-      <p>{value} </p>
+      <p className="text-right">{value} </p>
     </div>
   );
 };
