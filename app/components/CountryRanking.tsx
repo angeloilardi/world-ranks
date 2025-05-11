@@ -72,7 +72,7 @@ export default function CountryRanking() {
     (filters: FilterObject) => {
       return data.filter(
         (item) =>
-          (item.name.common
+          ((item.name.common
             .toLowerCase()
             .includes(filters.searchTerm.toLowerCase()) ||
             item.region
@@ -81,14 +81,13 @@ export default function CountryRanking() {
             item.subregion
               .toLowerCase()
               .includes(filters.searchTerm.toLowerCase())) &&
-          (filters.region.length > 0
-            ? filters.region.includes(item.region)
-            : true) &&
-          (filters.status.length && filters.status.includes("Independent")
-            ? item.independent
-            : filters.status.includes("Member of the United Nations")
-            ? item.unMember
-            : true)
+            (filters.region.length
+              ? filters.region.includes(item.region)
+              : true) &&
+            !filters.status.length) ||
+          (filters.status.includes("Independent") && item.independent) ||
+          (filters.status.includes("Member of the United Nations") &&
+            item.unMember)
       );
     },
     [data]
