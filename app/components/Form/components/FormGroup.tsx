@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import camelCase from "lodash/camelCase";
 
 export default function FormGroup({
   label,
@@ -9,7 +10,7 @@ export default function FormGroup({
 }) {
   return (
     <div className="flex flex-col w-full">
-      <label htmlFor={label} className="text-xs mb-2">
+      <label htmlFor={camelCase(label)} className="text-xs mb-2">
         {label}
       </label>
       {children}
