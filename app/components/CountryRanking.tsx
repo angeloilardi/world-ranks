@@ -2,7 +2,6 @@
 import Hero from "./Hero";
 import { ResultsTable } from "./ResultsTable";
 import Form from "./Form/Form";
-// import getCountries from "./hooks/getCountries";
 import { useCallback, useEffect, useState } from "react";
 
 interface CountryData {
@@ -51,25 +50,30 @@ export default function CountryRanking() {
   }, [filters.sortBy]);
 
   const sortData = useCallback(
-    (sortBy: string) => {
+    (sortBy: FilterObject["sortBy"]): CountryData[] => {
+      const sorted = data;
+
       switch (sortBy) {
         case "Population":
-          return data.sort((a, b) => b.population - a.population);
+          return sorted.sort((a, b) => b.population - a.population);
+
         case "Area":
-          return data.sort((a, b) => b.area - a.area);
+          return sorted.sort((a, b) => b.area - a.area);
+
         case "Name":
-          return data.sort((a, b) =>
+          return sorted.sort((a, b) =>
             a.name.common.localeCompare(b.name.common)
           );
+
         default:
-          break;
+          return sorted;
       }
     },
     [data]
   );
 
   const filterData = useCallback(
-    (filters: FilterObject) => {
+    (filters: FilterObject): CountryData[] => {
       return data.filter(
         (item) =>
           ((item.name.common
