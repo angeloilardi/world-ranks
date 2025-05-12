@@ -31,7 +31,7 @@
 
 ![screenshot](./public/images/Screenshot%202025-05-12%20at%2017.26.47.png)
 
-Web app with insightful data abot every single country in the world. What's the most populous country? What language do they speak? What currency do they use?
+Web app with insightful data about every single country in the world. What's the most populous country? What language do they speak? What currency do they use?
 
 ### What I learned
 
