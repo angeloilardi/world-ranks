@@ -1,5 +1,3 @@
-<!-- Please update value in the {}  -->
-
 <h1 align="center">WORLD RANKS | devChallenges</h1>
 
 <div align="center">
@@ -33,12 +31,12 @@
 
 ![screenshot](./public/images/Screenshot%202025-05-12%20at%2017.26.47.png)
 
-Web app with insightful data abot every single countty in the world. What's the most populous country? What language do they speak? What currency do the use?
+Web app with insightful data abot every single country in the world. What's the most populous country? What language do they speak? What currency do they use?
 
 ### What I learned
 
 The biggest learning was how to best approach sorting and filtering of data. I used plain JS for this purpose but I might look for a library that does that in the future.
-Another fun part was masterind TypeScript to make sure the app has a rock solid type safety in place.
+Another fun part was mastering TypeScript to make sure the app has a rock solid type safety in place.
 
 ### Useful resources
 
