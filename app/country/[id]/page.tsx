@@ -127,7 +127,7 @@ export default async function Country({
                           alt={flag.flags.alt}
                           width={100}
                           height={60}
-                          className="rounded-md w-24 h-16"
+                          className="rounded-md w-24 h-auto"
                         />
                         <p className="mt-2">{flag.name.common}</p>
                       </a>

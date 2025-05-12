@@ -23,7 +23,7 @@ const EmptyState = () => {
 
 export function ResultsTable({ results }: { results: Country[] }) {
   return (
-    <div>
+    <div className="flex-2/3">
       <table className="">
         <thead className="border-b-secondary border-b">
           <tr className="py-2">
