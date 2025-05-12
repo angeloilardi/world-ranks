@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<!-- Please update value in the {}  -->
 
-## Getting Started
+<h1 align="center">WORLD RANKS | devChallenges</h1>
 
-First, run the development server:
+<div align="center">
+   Solution for a challenge <a href="https://devchallenges.io/challenge/country-page" target="_blank">Country Page - WorldRanks
+</a> from <a href="http://devchallenges.io" target="_blank">devChallenges.io</a>.
+</div>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<div align="center">
+  <h3>
+    <a href="https://world-ranks-rouge.vercel.app/">
+      Demo
+    </a>
+    <span> | </span>
+    <a href="https://devchallenges.io/challenge/country-page">
+      Challenge
+    </a>
+  </h3>
+</div>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Table of Contents
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [Overview](#overview)
+  - [What I learned](#what-i-learned)
+  - [Useful resources](#useful-resources)
+- [Built with](#built-with)
+- [Features](#features)
+- [Contact](#contact)
+- [Acknowledgements](#acknowledgements)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Overview
 
-## Learn More
+![screenshot](./public/images/Screenshot%202025-05-12%20at%2017.26.47.png)
 
-To learn more about Next.js, take a look at the following resources:
+Web app with insightful data abot every single countty in the world. What's the most populous country? What language do they speak? What currency do the use?
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### What I learned
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The biggest learning was how to best approach sorting and filtering of data. I used plain JS for this purpose but I might look for a library that does that in the future.
+Another fun part was masterind TypeScript to make sure the app has a rock solid type safety in place.
 
-## Deploy on Vercel
+### Useful resources
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [Formik documenttion](https://www.formik.org) - This made the form handling so much easier
+- [NextJS Data Fetching](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching) - Making use of their native server-side data fetch
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Built with
+
+- Semantic HTML5 markup
+- CSS custom properties
+- Flexbox
+- CSS Grid
+- [React](https://reactjs.org/)
+- [Next.js](https://nextjs.org/)
+- [Tailwind](https://tailwindcss.com/)
+- [Formik](https://formik.org)
+
+## Features
+
+- By default, users can see a list of all countries sorted by population.
+- Users can choose to sort by name alphabetical order or population or area (km²).
+- Users can choose to filter by multiple regions, the regions can be Americas, Antarctic, Africa, Asia, Europe, or Oceania.
+- Users can choose to filter countries that are members of the United Nations.
+- Users can choose to filter countries that are independent.
+- Users can filter/search for countries by their names, regions or subregions.
+- Users can see the total number of countries.
+  Users can select a country and see more details on a country page.
+- On the country page, users can see info like population, area, capital,....
+- On the country page, users can see the neighboring countries.
+- On the country page, when users select a neighboring country, it should redirect to the according country page.
+
+This application/site was created as a submission to a [DevChallenges](https://devchallenges.io/challenges-dashboard) challenge.
+
+## Contact
+
+- Website [https://angelo-ilardi.vercel.app/](https://angelo-ilardi.vercel.app/})
+- GitHub [@angeloilardi](https://github.com/angeloilardi})
+
+## Acknowledgements
+
+- [REST Countries](https://restcountries.com/) for the precious data
