@@ -12,6 +12,8 @@ type Country = {
 };
 
 import Image from "next/image";
+import Pagination from "./Pagination";
+import { useState } from "react";
 
 const EmptyState = () => {
   return (
@@ -22,8 +24,17 @@ const EmptyState = () => {
 };
 
 export function ResultsTable({ results }: { results: Country[] }) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 10;
+
+  const paginatedResults = results.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+  console.log("paginatedResults", paginatedResults);
+
   return (
-    <div className="flex-2/3">
+    <div className="flex-2/3 flex-col">
       <table className="">
         <thead className="border-b-secondary border-b">
           <tr className="py-2">
@@ -41,8 +52,8 @@ export function ResultsTable({ results }: { results: Country[] }) {
           </tr>
         </thead>
         <tbody>
-          {results.length > 0 &&
-            results.map((country, i) => {
+          {paginatedResults.length > 0 &&
+            paginatedResults.map((country, i) => {
               return (
                 <tr key={i} className="py-6">
                   <td className="py-5 pr-10 min-w-5">
@@ -76,6 +87,12 @@ export function ResultsTable({ results }: { results: Country[] }) {
         </tbody>
       </table>
       {!results.length && <EmptyState></EmptyState>}
+      <Pagination
+        currentPage={currentPage}
+        totalItems={results?.length}
+        totalPages={Math.ceil(results?.length / 10)}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
     </div>
   );
 }
