@@ -32,7 +32,7 @@ const Pagination: React.FC<PaginationProps> = ({
         <button
           key={i}
           onClick={() => onPageChange(i)}
-          className={i === currentPage ? "active" : ""}
+          className={i === currentPage ? "border-b border-b-accent" : ""}
         >
           {i}
         </button>

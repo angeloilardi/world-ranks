@@ -13,7 +13,6 @@ type Country = {
 
 import Image from "next/image";
 import Pagination from "./Pagination";
-import { useState } from "react";
 
 const EmptyState = () => {
   return (
@@ -23,8 +22,15 @@ const EmptyState = () => {
   );
 };
 
-export function ResultsTable({ results }: { results: Country[] }) {
-  const [currentPage, setCurrentPage] = useState(1);
+export function ResultsTable({
+  results,
+  currentPage,
+  onPageChange,
+}: {
+  results: Country[];
+  currentPage: number;
+  onPageChange: (page: number) => void;
+}) {
   const ITEMS_PER_PAGE = 10;
 
   const paginatedResults = results.slice(
@@ -89,9 +95,9 @@ export function ResultsTable({ results }: { results: Country[] }) {
       {!results.length && <EmptyState></EmptyState>}
       <Pagination
         currentPage={currentPage}
+        totalPages={Math.ceil(results.length / ITEMS_PER_PAGE)}
         totalItems={results?.length}
-        totalPages={Math.ceil(results?.length / 10)}
-        onPageChange={(page) => setCurrentPage(page)}
+        onPageChange={onPageChange}
       />
     </div>
   );

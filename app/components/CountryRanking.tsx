@@ -36,6 +36,7 @@ export default function CountryRanking() {
     status: [],
     sortBy: "Population",
   });
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     async function getCountries() {
@@ -97,10 +98,12 @@ export default function CountryRanking() {
     [data]
   );
 
-  useEffect(
-    () => !!filters && setFilteredData(sortData(filters.sortBy) ?? []),
-    [filters, filters.sortBy, sortData]
-  );
+  useEffect(() => {
+    if (filters) {
+      setFilteredData(sortData(filters.sortBy) ?? []);
+    }
+    setCurrentPage(1);
+  }, [filters, filters.sortBy, sortData]);
 
   useEffect(() => {
     setFilteredData(filterData(filters));
@@ -124,7 +127,11 @@ export default function CountryRanking() {
             changeFilters={(filters: FilterObject) => setFilters(filters)}
           />
         </div>
-        <ResultsTable results={filteredData} />
+        <ResultsTable
+          results={filteredData}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+        />
       </div>
     </>
   );
