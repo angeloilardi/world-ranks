@@ -52,12 +52,14 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <div className="flex gap-4 flex-col">
-      <span className="text-gray-600">
-        Showing {(currentPage - 1) * 10 + 1} -{" "}
-        {Math.min(currentPage * 10, totalItems)} of {totalItems} results
-      </span>
-      <div className="flex gap-4">
+    <div className="flex gap-4 flex-col pb-4">
+      {totalItems > 0 && (
+        <span className="text-gray-600">
+          Showing {(currentPage - 1) * 10 + 1} -{" "}
+          {Math.min(currentPage * 10, totalItems)} of {totalItems} results
+        </span>
+      )}
+      <div className="flex gap-2.5 md:gap-4 max-w-fit">
         <button
           onClick={handlePrevious}
           disabled={currentPage === 1}
