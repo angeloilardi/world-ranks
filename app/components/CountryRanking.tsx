@@ -37,13 +37,16 @@ export default function CountryRanking() {
     sortBy: "Population",
   });
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setisLoading] = useState(false);
 
   useEffect(() => {
     async function getCountries() {
+      setisLoading(true);
       const url =
         "https://restcountries.com/v3.1/all?fields=name,flags,area,population,region,independent,unMember,subregion";
       const res = await fetch(url, { cache: "force-cache" });
       const data = await res.json();
+      setisLoading(false);
       setData(data);
       return data;
     }
@@ -131,6 +134,7 @@ export default function CountryRanking() {
           results={filteredData}
           currentPage={currentPage}
           onPageChange={setCurrentPage}
+          isLoading={isLoading}
         />
       </div>
     </>

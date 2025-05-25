@@ -1,3 +1,7 @@
+import Image from "next/image";
+
+import Pagination from "./Pagination";
+
 type Country = {
   name: {
     common: string;
@@ -11,9 +15,6 @@ type Country = {
   area: number;
 };
 
-import Image from "next/image";
-import Pagination from "./Pagination";
-
 const EmptyState = () => {
   return (
     <div>
@@ -26,10 +27,12 @@ export function ResultsTable({
   results,
   currentPage,
   onPageChange,
+  isLoading,
 }: {
   results: Country[];
   currentPage: number;
   onPageChange: (page: number) => void;
+  isLoading?: boolean;
 }) {
   const ITEMS_PER_PAGE = 10;
 
@@ -37,7 +40,6 @@ export function ResultsTable({
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
-  console.log("paginatedResults", paginatedResults);
 
   return (
     <div className="flex-2/3 flex-col">
@@ -58,6 +60,13 @@ export function ResultsTable({
           </tr>
         </thead>
         <tbody>
+          {isLoading && (
+            <tr>
+              <td colSpan={5} className="text-center py-6">
+                Loading...
+              </td>
+            </tr>
+          )}
           {paginatedResults.length > 0 &&
             paginatedResults.map((country, i) => {
               return (
@@ -92,13 +101,16 @@ export function ResultsTable({
             })}
         </tbody>
       </table>
-      {!results.length && <EmptyState></EmptyState>}
-      <Pagination
-        currentPage={currentPage}
-        totalPages={Math.ceil(results.length / ITEMS_PER_PAGE)}
-        totalItems={results?.length}
-        onPageChange={onPageChange}
-      />
+      {!paginatedResults.length && !isLoading ? (
+        <EmptyState></EmptyState>
+      ) : (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={Math.ceil(results.length / ITEMS_PER_PAGE)}
+          totalItems={results?.length}
+          onPageChange={onPageChange}
+        />
+      )}
     </div>
   );
 }
