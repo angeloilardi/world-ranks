@@ -23,6 +23,28 @@ const EmptyState = () => {
   );
 };
 
+const LoadingsState = () => {
+  return (
+    <tr>
+      <td className="py-4 pr-10 min-w-5">
+        <div className="w-10 h-6 bg-gray-200 animate-pulse rounded" />
+      </td>
+      <td className="pr-10">
+        <div className="w-24 h-4 bg-gray-200 animate-pulse rounded" />
+      </td>
+      <td className="pr-10">
+        <div className="w-16 h-4 bg-gray-200 animate-pulse rounded" />
+      </td>
+      <td className="pr-10 hidden sm:table-cell">
+        <div className="w-16 h-4 bg-gray-200 animate-pulse rounded" />
+      </td>
+      <td className="hidden lg:table-cell">
+        <div className="w-16 h-4 bg-gray-200 animate-pulse rounded" />
+      </td>
+    </tr>
+  );
+};
+
 export function ResultsTable({
   results,
   currentPage,
@@ -60,56 +82,53 @@ export function ResultsTable({
           </tr>
         </thead>
         <tbody>
-          {isLoading && (
-            <tr>
-              <td colSpan={5} className="text-center py-6">
-                Loading...
-              </td>
-            </tr>
-          )}
-          {paginatedResults.length > 0 &&
-            paginatedResults.map((country, i) => {
-              return (
-                <tr key={i} className="py-6">
-                  <td className="py-5 pr-10 min-w-5">
-                    {
-                      <Image
-                        src={country.flags.png}
-                        alt={country.flags.alt}
-                        width={50}
-                        height={40}
-                        className="w-10 h-auto"
-                      />
-                    }
-                  </td>
-                  <td className="pr-10">
-                    <a href={`/country/${country.name.common}`}>
-                      {country.name.common}
-                    </a>
-                  </td>
-                  <td className="pr-10">
-                    <p>{country.population.toLocaleString()}</p>
-                  </td>
-                  <td className="pr-10 hidden sm:table-cell">
-                    <p>{country.area.toLocaleString()}</p>
-                  </td>
-                  <td className="hidden lg:table-cell">
-                    <p>{country.region}</p>
-                  </td>
-                </tr>
-              );
-            })}
+          {isLoading
+            ? Array.from({ length: 5 }).map((_, i) => <LoadingsState key={i} />)
+            : paginatedResults.length > 0 &&
+              paginatedResults.map((country, i) => {
+                return (
+                  <tr key={i} className="py-6">
+                    <td className="py-5 pr-10 min-w-5">
+                      {
+                        <Image
+                          src={country.flags.png}
+                          alt={country.flags.alt}
+                          width={50}
+                          height={40}
+                          className="w-10 h-auto"
+                        />
+                      }
+                    </td>
+                    <td className="pr-10">
+                      <a href={`/country/${country.name.common}`}>
+                        {country.name.common}
+                      </a>
+                    </td>
+                    <td className="pr-10">
+                      <p>{country.population.toLocaleString()}</p>
+                    </td>
+                    <td className="pr-10 hidden sm:table-cell">
+                      <p>{country.area.toLocaleString()}</p>
+                    </td>
+                    <td className="hidden lg:table-cell">
+                      <p>{country.region}</p>
+                    </td>
+                  </tr>
+                );
+              })}
         </tbody>
       </table>
       {!paginatedResults.length && !isLoading ? (
-        <EmptyState></EmptyState>
+        <EmptyState />
       ) : (
-        <Pagination
-          currentPage={currentPage}
-          totalPages={Math.ceil(results.length / ITEMS_PER_PAGE)}
-          totalItems={results?.length}
-          onPageChange={onPageChange}
-        />
+        paginatedResults.length > 0 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={Math.ceil(results.length / ITEMS_PER_PAGE)}
+            totalItems={results?.length}
+            onPageChange={onPageChange}
+          />
+        )
       )}
     </div>
   );
