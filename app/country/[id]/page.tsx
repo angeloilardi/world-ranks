@@ -68,7 +68,7 @@ export default async function Country({
   return (
     <div>
       <Hero />
-      <div className="flex flex-col items-center max-w-3xl -mt-16 mb-16 border border-secondary rounded-lg bg-background mx-auto">
+      <div className="flex flex-col items-center max-w-3xl -mt-16 md:-mt-12 mb-16 border border-secondary rounded-lg bg-background mx-auto">
         <Image
           src={country.flags.png || ""}
           alt={country.flags.alt || ""}

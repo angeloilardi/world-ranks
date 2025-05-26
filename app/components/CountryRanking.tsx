@@ -123,7 +123,7 @@ export default function CountryRanking() {
   return (
     <>
       <Hero />
-      <div className="rounded-lg bg-background -mt-40 mx-4 p-4 border border-primary flex flex-col md:flex-row md:gap-6 z-20">
+      <div className="rounded-lg bg-background -mt-40 md:-mt-20 mx-4 p-4 border border-primary flex flex-col md:flex-row md:gap-6 z-20">
         <div>
           <Counter></Counter>
           <Form
